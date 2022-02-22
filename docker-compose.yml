@@ -15,8 +15,6 @@ services:
     command: npm run start:dev
     env_file:
       - ./app.env
-    networks:
-      - webnet
     depends_on:
       - db
 
@@ -29,7 +27,8 @@ services:
     environment:
       - MYSQL_DATABASE=football_ranking
       - MYSQL_ROOT_PASSWORD=example
-      - MYSQL_USER=root
+      - MYSQL_USER=demo
+      - MYSQL_PASSWORD=password
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     ports:
     - 3306:3306
@@ -40,9 +39,7 @@ services:
             timeout: 20s
             retries: 10
     volumes:
-    - ./mysql_data:/var/lib/mysql
+    - football_ranking_mysql_data:/var/lib/mysql
 
-networks:
-  webnet:
 volumes:
   football_ranking_mysql_data:
